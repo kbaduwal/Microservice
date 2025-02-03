@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: Khelna_jum_Service_Registry
+
+server:
+  port: 8761
+
+eureka:
+  client:
+    register-with-eureka: false

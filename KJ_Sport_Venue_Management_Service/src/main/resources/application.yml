@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: KJ_Sport_Venue_Management_Service
+
+server:
+  port: 8082

@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: KJ_Uer_Authentican_Service
+  boot:
+    admin:
+      client:
+        url: http://localhost:1111/
+
+
+server:
+  port: 8081
+
+#axpose all actuators endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

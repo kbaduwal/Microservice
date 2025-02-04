@@ -1,6 +1,6 @@
 spring:
   application:
-    name: KJ_Uer_Authentican_Service
+    name: user_authenticate
   boot:
     admin:
       client:

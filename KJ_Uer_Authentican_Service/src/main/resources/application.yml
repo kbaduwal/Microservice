@@ -1,11 +1,10 @@
 spring:
   application:
-    name: user_authenticate
+    name: user-authenticate
   boot:
     admin:
       client:
         url: http://localhost:1111/
-
 
 server:
   port: 8081

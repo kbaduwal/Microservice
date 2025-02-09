@@ -1,6 +1,6 @@
 spring:
   application:
-    name: KJ_Sport_Venue_Management_Service
+    name: sport-venue-management-service
   boot:
     admin:
       client:

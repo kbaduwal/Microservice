@@ -25,6 +25,4 @@ public class User {
     //Verification code for account activation
     private String verificationCode;
     private LocalDateTime tokenExpiration;
-
-
 }

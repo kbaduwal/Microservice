@@ -1,7 +1,9 @@
 package com.kj_sport_venue_management_service.service;
 
+import com.kj_sport_venue_management_service.dto.FacilityDto;
 import com.kj_sport_venue_management_service.dto.VenueDto;
 import com.kj_sport_venue_management_service.dto.VenueInformationDTo;
+import com.kj_sport_venue_management_service.dto.updateVenueDto;
 import com.kj_sport_venue_management_service.entity.Facility;
 import com.kj_sport_venue_management_service.entity.Venue;
 import com.kj_sport_venue_management_service.repository.FacilityRepository;
@@ -112,7 +114,13 @@ public class VenueServiceImpl implements VenueService {
                 .capacity(venue.getCapacity())
                 .operatingHours(venue.getOperatingHours())
                 .pricing(venue.getPricing())
-                .facilities(venue.getFacilities())
+                .facilities(venue.getFacilities().stream()
+                        .map(facility -> FacilityDto.builder()
+                                .facilityId(facility.getFacilityId())
+                                .name(facility.getName())
+                                .iconUrl(facility.getIconUrl())
+                                .build()
+                        ).collect(Collectors.toSet()))
                 .build();
     }
 
@@ -128,6 +136,49 @@ public class VenueServiceImpl implements VenueService {
                 .map(this::venueToInformationDto)
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public VenueInformationDTo updateVenue(Long id, updateVenueDto updateVenueDto) {
+        //Fetch the existing venue by Id
+        Venue venue = venueRepository.findById(id).orElseThrow(()
+                ->new NotFoundException("Venue with id " + id + " not found"));
+
+        if(updateVenueDto.getVenueName() != null){
+            venue.setVenueName(updateVenueDto.getVenueName());
+        }
+
+        if(updateVenueDto.getVenueAddress() != null){
+            venue.setVenueAddress(updateVenueDto.getVenueAddress());
+        }
+        if(updateVenueDto.getPhoneNumber() != null){
+            venue.setPhoneNumber(updateVenueDto.getPhoneNumber());
+        }
+
+        if (updateVenueDto.getCapacity() != null){
+            venue.setCapacity(updateVenueDto.getCapacity());
+        }
+
+        if(updateVenueDto.getOperatingHours() != null){
+            venue.setOperatingHours(updateVenueDto.getOperatingHours());
+        }
+
+        if (updateVenueDto.getPricing() != null){
+            venue.setPricing(updateVenueDto.getPricing());
+        }
+
+        if(updateVenueDto.getFacilities() != null && updateVenueDto.getFacilities().isEmpty()){
+            Set<Facility> facilities = updateVenueDto.getFacilities().stream()
+                    .map(facilityDto -> facilityRepository.findById(facilityDto.getFacilityId())
+                            .orElseThrow(()-> new RuntimeException("Facility not found with ID: "+facilityDto.getFacilityId()))
+                    ).collect(Collectors.toSet());
+
+            venue.getFacilities().clear();
+            venue.getFacilities().addAll(facilities);
+        }
+
+        Venue updatedVenue = venueRepository.save(venue);
+        return venueToInformationDto(updatedVenue);
     }
 
 

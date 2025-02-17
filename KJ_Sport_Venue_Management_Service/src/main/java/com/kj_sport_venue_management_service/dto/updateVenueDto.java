@@ -1,17 +1,17 @@
 package com.kj_sport_venue_management_service.dto;
 
 import com.kj_sport_venue_management_service.entity.Facility;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Set;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
-@Builder
-public class VenueInformationDTo {
+public class updateVenueDto {
     private String venueName;
     private String venueAddress;
     private String phoneNumber;

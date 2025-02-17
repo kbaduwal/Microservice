@@ -2,6 +2,7 @@ package com.kj_sport_venue_management_service.controller;
 
 import com.kj_sport_venue_management_service.dto.VenueDto;
 import com.kj_sport_venue_management_service.dto.VenueInformationDTo;
+import com.kj_sport_venue_management_service.dto.updateVenueDto;
 import com.kj_sport_venue_management_service.service.VenueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,12 @@ public class VenueController {
 
         List<VenueInformationDTo> venues = venueService.getByPartialName(venueName);
         return ResponseEntity.status(HttpStatus.OK).body(venues);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<VenueInformationDTo> updateVenue(@PathVariable("id") Long id , @RequestBody updateVenueDto updateVenue ) {
+        VenueInformationDTo updatedVenue = venueService.updateVenue(id,updateVenue);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedVenue);
     }
 
 }

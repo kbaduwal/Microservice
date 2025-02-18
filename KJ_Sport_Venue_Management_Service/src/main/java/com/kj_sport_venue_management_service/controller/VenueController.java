@@ -1,7 +1,6 @@
 package com.kj_sport_venue_management_service.controller;
 
 import com.kj_sport_venue_management_service.dto.VenueDto;
-import com.kj_sport_venue_management_service.dto.VenueInformationDTo;
 import com.kj_sport_venue_management_service.service.VenueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

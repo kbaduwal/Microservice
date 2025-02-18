@@ -1,20 +1,14 @@
 package com.kj_sport_venue_management_service.dto;
 
-import com.kj_sport_venue_management_service.entity.Facility;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Set;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class VenueDto {
+    private Long venueId;
     private String venueName;
     private String venueAddress;
     private String phoneNumber;
@@ -22,8 +16,4 @@ public class VenueDto {
     private Double longitude;
     private Integer capacity;
     private String openingHours;
-    private BigDecimal pricing;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private Set<Facility> facilities;
 }

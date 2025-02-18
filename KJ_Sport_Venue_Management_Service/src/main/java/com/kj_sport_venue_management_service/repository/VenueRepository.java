@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface VenueRepository extends JpaRepository<Venue, Long> {
-    List<Venue> findByVenueName(String venueName);
+    Venue findByVenueName(String venueName);
     Venue findByVenueId(Long venueId);
     boolean existsByVenueNameAndVenueAddress(String venueName, String venueAddress);
 

@@ -167,14 +167,25 @@ public class VenueServiceImpl implements VenueService {
             venue.setPricing(updateVenueDto.getPricing());
         }
 
-        if(updateVenueDto.getFacilities() != null && updateVenueDto.getFacilities().isEmpty()){
-            Set<Facility> facilities = updateVenueDto.getFacilities().stream()
-                    .map(facilityDto -> facilityRepository.findById(facilityDto.getFacilityId())
-                            .orElseThrow(()-> new RuntimeException("Facility not found with ID: "+facilityDto.getFacilityId()))
-                    ).collect(Collectors.toSet());
+        if(updateVenueDto.getFacilities() != null && !updateVenueDto.getFacilities().isEmpty()){
+            Set<Facility> updateFacilities = updateVenueDto.getFacilities().stream()
+                    .map(facilityDto ->{
+                        Facility facility = facilityRepository.findById(facilityDto.getFacilityId())
+                        .orElseThrow(() -> new RuntimeException("Facility not found with ID: " + facilityDto.getFacilityId()));
+
+                        //update facility details if provided in DTO
+                        if(facilityDto.getName() != null){
+                            facility.setName(facilityDto.getName());
+                        }
+                        if(facilityDto.getIconUrl() != null){
+                           facility.setIconUrl(facilityDto.getIconUrl());
+                        }
+                        return facilityRepository.save(facility);
+            })
+            .collect(Collectors.toSet());
 
             venue.getFacilities().clear();
-            venue.getFacilities().addAll(facilities);
+            venue.getFacilities().addAll(updateFacilities);
         }
 
         Venue updatedVenue = venueRepository.save(venue);

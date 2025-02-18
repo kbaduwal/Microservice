@@ -51,12 +51,12 @@ public class Venue {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @ManyToMany(cascade = {CascadeType.MERGE})
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
-            name = "venue_facilities",
+            name = "venue_games",
             joinColumns = @JoinColumn(name = "venue_id"),
-            inverseJoinColumns = @JoinColumn(name = "facility_id")
+            inverseJoinColumns = @JoinColumn(name = "game_id")
     )
-    private Set<Facility> facilities = new HashSet<>();
+    private Set<Game> games = new HashSet<>();
 
 }

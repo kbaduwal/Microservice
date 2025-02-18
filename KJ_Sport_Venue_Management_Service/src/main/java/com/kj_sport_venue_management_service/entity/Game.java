@@ -13,19 +13,25 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "facilities")
-public class Facility {
+@Table(name = "games")
+public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column( name = "facility_id")
-    private Long facilityId;
+    @Column( name = "game_id")
+    private Long gameId;
 
     @Column(name = "name", nullable = false, unique = true)
-    private String name;
+    private String gameName;
 
     @Column(name = "icon_url", nullable = false, unique = true)
     private String iconUrl;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "price_per_hour")
+    private Double pricePerHour;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)

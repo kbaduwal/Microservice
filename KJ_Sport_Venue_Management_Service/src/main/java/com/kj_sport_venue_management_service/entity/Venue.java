@@ -3,7 +3,6 @@ package com.kj_sport_venue_management_service.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -41,9 +40,6 @@ public class Venue {
 
     @Column(name = "operating_hours")
     private String operatingHours;
-
-    @Column(name = "pricing")
-    private BigDecimal pricing;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

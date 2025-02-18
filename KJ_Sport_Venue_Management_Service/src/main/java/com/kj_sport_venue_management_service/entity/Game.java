@@ -6,6 +6,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name = "games")
+@Builder
 public class Game {
 
     @Id
@@ -32,6 +35,9 @@ public class Game {
 
     @Column(name = "price_per_hour")
     private Double pricePerHour;
+
+    @ManyToMany(mappedBy = "games")
+    private Set<Venue> venues = new HashSet<>();
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
